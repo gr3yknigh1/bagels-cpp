@@ -15,13 +15,13 @@ namespace rnd
 }
 
 
+const int GUESS_LENGTH = 3;
+const int mn = 100;
+const int mx = 1000;
+
+
 int main()
 {
-	std::cout << "Hi hi there\n";
-
-	const int mn = 100;
-	const int mx = 1000;
-	
 	int secret = rnd::gen_int(mn, mx);
 	std::string str_secret = std::to_string(secret);
 	std::cout << "Secret: " << secret << std::endl;
@@ -32,11 +32,53 @@ int main()
 	{
 		std::cout << "Guess: ";
 		std::cin >> guess;
+		// std::cout << "Got: " << guess << std::endl;
+		
+
 		if (guess == "q")
 			break;
-		std::cout << "Got: " << guess << std::endl;
+		if (guess.length() != GUESS_LENGTH)
+		{
+			std::cout << "Guess must be length of 3.";
+			continue;
+		}
 
-			
+		if (guess == str_secret)
+		{
+			std::cout << "Win!\n";
+			break;
+		}
+
+		int founded_chars_count = 0;
+		for (int i = 0; i <= GUESS_LENGTH; i++)
+		{
+			auto pos = str_secret.find(guess[i]);
+
+			if (pos == std::string::npos)
+			{
+				continue;
+			}
+			else
+			{
+				founded_chars_count++;
+				if (pos == i)
+				{
+					std::cout << "Fermi ";
+				}
+				else
+				{
+					std::cout << "Pico ";
+				}
+			}
+		}
+		if (founded_chars_count == 0)
+		{
+			std::cout << "Bagels\n";
+		}
+		else
+		{
+			std::cout << "\n";
+		}
 	}
 	return 0;
 }
