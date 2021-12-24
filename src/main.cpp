@@ -27,19 +27,19 @@ int main()
 	std::cout << "Secret: " << secret << std::endl;
 
 	std::string guess;
+	int founded_chars_count;
 
 	while (true)
 	{
-		std::cout << "Guess: ";
+		std::cout << ">> ";
 		std::cin >> guess;
-		// std::cout << "Got: " << guess << std::endl;
 		
 
 		if (guess == "q")
 			break;
 		if (guess.length() != GUESS_LENGTH)
 		{
-			std::cout << "Guess must be length of 3.";
+			std::cout << "[error] Guess must be length of 3\n";
 			continue;
 		}
 
@@ -49,7 +49,7 @@ int main()
 			break;
 		}
 
-		int founded_chars_count = 0;
+		founded_chars_count = 0;
 		for (int i = 0; i <= GUESS_LENGTH; i++)
 		{
 			auto pos = str_secret.find(guess[i]);
@@ -73,11 +73,11 @@ int main()
 		}
 		if (founded_chars_count == 0)
 		{
-			std::cout << "Bagels\n";
+			std::cout << "Bagels\n\n";
 		}
 		else
 		{
-			std::cout << "\n";
+			std::cout << "\n\n";
 		}
 	}
 	return 0;
